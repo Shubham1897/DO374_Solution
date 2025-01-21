@@ -1,0 +1,15 @@
+---
+ - name: Creating playbook to copy content using tags
+   hosts: all
+   become: true
+   tasks:
+     - name: Adding alpha tag 
+       copy:
+         content: "development"
+         dest: /etc/myhosts
+       tags: ['alpha','never']
+     - name: Adding beta tag
+       copy:
+         content: "production"
+         dest: /etc/myhosts
+       tags: ['beta','never']
