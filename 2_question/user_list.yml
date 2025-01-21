@@ -1,0 +1,9 @@
+users:
+  - name: Shubham
+    group: developer
+  - name: Shravani
+    group: developer
+  - name: Deepak
+    group: developer
+  - name: Bob
+    group: developer
