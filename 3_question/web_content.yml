@@ -1,0 +1,15 @@
+---
+ - name: Creating playbook to manage eb content"
+   host: all
+   become: true
+   tasks:
+     - name: Copying content in document root
+       copy:
+         content: "It is working"
+         dest: /var/www/html/index.html
+       notify: restart httpd
+   handlers:
+     - name: restart httpd
+       service:
+         name: httpd
+         state: restarted
