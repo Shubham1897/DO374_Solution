@@ -1,0 +1,16 @@
+---
+ - name: Create a playbook to generate and encrypt password
+   hosts: all
+   become: true
+   vars_files:
+     - user_list.yml
+   tasks:
+     - name: adding user and generating password
+       user:
+         name: "{{ item.name }}"
+         uid: "{{ item.uid }}"
+         comment: "{{ item.first | capitalize }} {{ item.second | capitalize }} {{ item.last | capitalize }}"
+         password: "{{ password | password_hash('sha256') }}"
+       loop: "{{ users }}"
+       vars:
+         password: "{{ lookup('ansible.builtin.password', './password-{{ item.name }}.txt', length=10) }}"
